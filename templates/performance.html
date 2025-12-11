@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./static/style.css">
+        <title>FraudDetectML API</title>
+        <script src="static/script.js"></script>
+    </head>
+    <body>
+        <h1>Welcome to the FraudDetectML API</h1>
+        <div class="page-container">
+            <a class = 'nav-sec' href="/">Home Page</a>
+            <a class = 'nav-sec' href="descriptors">Descriptive Statistics</a>
+            <a class = 'nav' href="performance">Model Performance</a>
+            <a class = 'nav-sec' href="query">Real Time Prediction</a>
+            <br>
+            <br>
+            <h2>Out-of-Sample Performance Metrics</h2>
+            <div id="divthreshold">
+                <label for="threshold">Threshold for Fraud Classification:</label>
+                <br>
+                <input type="range" id="threshold" name="threshold" min="5" max="95" value="50" oninput="updateSlider()" onload="updateSlider()" required>
+                <span id="displayValue"></span>
+                <button class = "styled-button-reset" onclick="resetSlider()">Reset Slider</button>
+            </div>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="perfhead">Available Models</th>
+                        <th class="perfhead">Accuracy</th>
+                        <th class="perfhead">Precision</th>
+                        <th class="perfhead">  Recall  </th>
+                        <th class="perfhead">F1 Score</th>
+                        <th class="perfhead">ROC_AUC</th>
+                        <th class="perfhead">True Pos</th>
+                        <th class="perfhead">False Pos</th>
+                        <th class="perfhead">True Neg</th>
+                        <th class="perfhead">False Neg</th>
+                        <th class="perfhead">Resp. Time (ms)</th>
+                        <th class="perfhead">Status</th>
+                        <th class="perfhead"><input class="styled-button" id = "predict" type="submit" value="Fetch All" onclick="modelPerfMult('{{ model }}')"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for model in models %}
+                    <tr>
+                        <td id="{{ model }}" class="modelName">{{ model }}</td>
+                        <td id="{{ model }}-acc" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-prec" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-rec" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-f1" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-roc_auc" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-tp" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-fp" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-tn" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-fn" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-rt" class="perf loader {{ model }}"></td>
+                        <td id="{{ model }}-sc" class="perf loader {{ model }}"></td>
+                        <td><input class = "styled-button" id = "predict" type="submit" value="Fetch" onclick="modelPerf('{{ model }}')"></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <footer>*Model performance based on out-of-sample set to simulate realistic strength of each model on unseen data. (Set excluded from model training)</footer>
+        <img class="decorative-image" src="./static/images/abstract.jpg"/>
+        <footer>This API utilizes pre-trained models on a synthetic dataset to produce real-time predictions.</footer>
+        <footer>Credit to Samay Ashar on Kaggle for supplement of this dataset. Link: https://www.kaggle.com/datasets/samayashar/fraud-detection-transactions-dataset</footer>
+        <footer>This API should not be used to predict real transactions.</footer>
+        <footer>© 2025 Carlos Hannan</footer>
+    </body>
+</html>

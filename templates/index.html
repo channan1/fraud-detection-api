@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./static/style.css">
+        <title>FraudDetectML API</title>
+        <script src="static/script.js"></script>
+    </head>
+    <body>
+        <h1>Welcome to the FraudDetectML API</h1>
+        <div class="page-container">
+            <a class = 'nav' href="/">Home Page</a>
+            <a class = 'nav-sec' href="descriptors">Descriptive Statistics</a>
+            <a class = 'nav-sec' href="performance">Model Performance</a>
+            <a class = 'nav-sec' href="query">Real Time Prediction</a>
+            <br>
+        </div>
+        <br>
+        <div class="container">
+            <div class="box float-right">
+                <h2>About</h2>
+                <p class="home">The FraudDetectML interface is trained using 50,000 synthetic records with a total of 16 predictors on 7 different models. These models have been included in this API to simulate model comparison and real-time fraud prediction, not dissimilar to production-level services provided to detect fraud at scale.</p>
+            </div>
+            <div class="box float-right">
+                <h2>Descriptive Statistics</h2>
+                <p class="home">This page highlights the correlations and patterns existent in the dataset, along with correlations of each predictor to the dependent variable, scale distribution of predictors and more.</p>
+            </div>
+            <div class="box float-right">
+                <h2>Model Performance</h2>
+                <p class="home">Use this dashboard to compare the performance and query times of available models.</p>
+            </div>
+            <div class="box float-right">    
+                <h2>Real Time Prediction</h2>
+                <p class="home">Run the API to get real-time predictions.</p>
+            </div>
+        </div> 
+        <img class="decorative-image" src="./static/images/abstract.jpg"/>
+        <footer>This API utilizes pre-trained models on a synthetic dataset to produce real-time predictions.</footer>
+        <footer>Credit to Samay Ashar on Kaggle for supplement of this dataset. Link: https://www.kaggle.com/datasets/samayashar/fraud-detection-transactions-dataset</footer>
+        <footer>This API should not be used to predict real transactions.</footer>
+        <footer>© 2025 Carlos Hannan</footer>
+    </body>
+</html>

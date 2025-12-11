@@ -1,0 +1,46 @@
+# Install packages in the NEW clean venv
+pip install -r requirements.txt
+```
+
+### **Step 4: Create Proper .gitignore**
+
+Create `.gitignore` with this content:
+```
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+Lib/
+Scripts/
+Include/
+share/
+pyvenv.cfg
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Data files
+data/synthetic_fraud_dataset.csv
+backdup-data/
+
+# !data/*.csv
+# !data/synthetic_fraud_dataset.csv
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log"backup-data/" 
+"backup-data/" 
+
+backup-data/

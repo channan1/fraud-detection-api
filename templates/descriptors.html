@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./static/style.css">
+        <title>FraudDetectML API</title>
+        <script src="static/script.js"></script>
+    </head>
+    <body>
+        <h1>Welcome to the FraudDetectML API</h1>
+        <div class="page-container">
+            <a class = 'nav-sec' href="/">Home Page</a>
+            <a class = 'nav' href="descriptors">Descriptive Statistics</a>
+            <a class = 'nav-sec' href="performance">Model Performance</a>
+            <a class = 'nav-sec' href="query">Real Time Prediction</a>
+            <br>
+        </div>
+        <br>
+        <label id="desc-label" for="models">Choose a Descriptive Analytics Category</label>
+        <br>
+        <select id="plotOptions" onchange="descriptorFilter(this.value)">
+            <option value="Correlation Matrices" selected>Correlation Matrices</option>
+            <option value="Scales">Scales</option>
+            <option value="Fraud by Key Attributes">Fraud by Key Attributes</option>
+            <option value="Time Series Analysis">Time Series Analysis</option>
+            <option value="Principal Component Analysis">Principal Component Analysis</option>
+            <option value="All Descriptive Analytics">All Descriptive Analytics</option>
+        </select>
+        <div class='descClass' id="corr">
+            <h2>Correlation Matrices</h2>
+            <img class="corr" src="./static/images/corrplot.png"/>
+            <img class="corr" src="./static/images/corrplot_categorical.png"/>
+        </div>
+        <div class='descClass' id="scales">
+            <h2>Scales</h2>
+            <img class="scales" src="./static/images/Dot Plot.png"/>
+            <img class="scales" src="./static/images/Dot Plot Trimmed.png"/>
+        </div>
+        <div class='descClass' id="fbka">
+            <h2>Fraud by Key Attributes</h2>
+            <img class="fbka" src="./static/images/Fraud by User ID.png"/>
+            <img class="fbka" src="./static/images/FraudPerc by Authentication Method.png"/>
+            <img class="fbka" src="./static/images/FraudPerc by Card Type.png"/>
+            <img class="fbka" src="./static/images/FraudPerc by City.png"/>
+            <img class="fbka" src="./static/images/FraudPerc by Device Type.png"/>
+            <img class="fbka" src="./static/images/FraudPerc by Merchant Type.png"/>
+            <img class="fbka" src="./static/images/FraudPerc by Transaction Type.png"/>
+        </div>
+        <div class='descClass' id="tsa">
+            <h2>Time Series Analyses</h2>
+            <img class="tsa" src="./static/images/Instances of Fraud by Date.png"/>
+            <img class="tsa" src="./static/images/Instances of Fraud by Month.png"/>
+        </div>
+        <div class='descClass' id="pca">
+            <h2>Principal Component Analysis</h2>
+            <img class="pca" src="./static/images/Principal Component Analysis.png"/>
+        </div>
+        <!-- <img alt="corrplot" src="./static/images/corrplot.png"/>
+        <img alt="corrplot" src="./static/images/corrplot.png"/>
+        <img alt="corrplot" src="./static/images/corrplot.png"/>
+        <img alt="corrplot" src="./static/images/corrplot.png"/> -->
+        <div class="container">
+        </div>
+        <img class="decorative-image" src="./static/images/abstract.jpg"/>
+        <footer>This API utilizes pre-trained models on a synthetic dataset to produce real-time predictions.</footer>
+        <footer>Credit to Samay Ashar on Kaggle for supplement of this dataset. Link: https://www.kaggle.com/datasets/samayashar/fraud-detection-transactions-dataset</footer>
+        <footer>This API should not be used to predict real transactions.</footer>
+        <footer>© 2025 Carlos Hannan</footer>
+    </body>
+</html>

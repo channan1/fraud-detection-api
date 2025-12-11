@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./static/style.css">
+        <title>FraudDetectML API</title>
+        <script src="static/script.js"></script>
+    </head>
+    <body>
+        <h1>Real-Time Query API</h1>
+        <div class="page-container">
+            <a class = 'nav-sec'href="/">Home Page</a>
+            <a class = 'nav-sec' href="descriptors">Descriptor Information</a>
+            <a class = 'nav-sec' href="performance">Model Performance</a>
+            <a class = 'nav' href="query">Real Time Prediction</a>
+        </div>
+        <br>
+        <div class="container">
+            <div class ="box float-left">
+                <div id="divmodels">
+                    <!-- <h2 class = "queryh2">Input Parameters:</h2>
+                    <br>
+                    <br> -->
+                    <label for="models" id="modelLabel">Choose a Detection Model:</label>
+                    <br>
+                    <select class="model-options" name="models" id="models">
+                    {% for model in models %}
+                        <option class="model-options" value="{{ model }}">{{ model }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <div id="divthreshold">
+                    <label for="threshold">Threshold for Fraud Classification:</label>
+                    <br>
+                    <input type="range" id="threshold" name="threshold" min="5" max="95" value="50" oninput="updateSlider()" onload="updateSlider()" required>
+                    <span id="displayValue"></span>
+                    <button class="styled-button-reset" onclick="resetSlider()">Reset Slider</button>
+                </div>
+                <br>
+                <div id="divtransaction">
+                    <label for="transaction">Enter an index between 0 and 49999:</label>
+                    <br>
+                    <input class="model-options" type="number" id="predictors" min="0" max="49999" value="5" required>
+                </div>
+                <br>
+                <div>
+                    <input class="styled-button-predict" id = "predict" type="submit" value="Predict" onclick="singleQueryTimed()">
+                </div>
+                <br>
+                <div id="status">
+                </div>
+                <div id = 'timer'>
+
+                </div>
+            </div>
+            <div class="box float-right" id="results-box">
+                <div id = 'api-results'>
+
+                </div>
+                <div id="table">
+                </div>
+            </div>
+        </div>
+        <img class="decorative-image" src="./static/images/abstract.jpg"/>
+        <footer>This API utilizes pre-trained models on a synthetic dataset to produce real-time predictions.</footer>
+        <footer>Credit to Samay Ashar on Kaggle for supplement of this dataset. Link: https://www.kaggle.com/datasets/samayashar/fraud-detection-transactions-dataset</footer>
+        <footer>This API should not be used to predict real transactions.</footer>
+        <footer>© 2025 Carlos Hannan</footer>
+    </body>
+</html>
