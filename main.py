@@ -98,24 +98,61 @@ class SinglePredict(BaseModel):
 def single_predict(obs_predict: SinglePredict):
     if obs_predict.model not in models:
              raise HTTPException(status_code=400, detail="Model not found")
-    if obs_predict.index >= 50000 or obs_predict.index<0:
-         raise HTTPException(status_code=400, detail="Index value must be greater than 0 and less than 49999.")
+    if obs_predict.index >= 7500 or obs_predict.index < 0:
+         raise HTTPException(status_code=400, detail="Index value must be greater than or equal to 0 and less than 7500.")
     if obs_predict.proba < 0 or obs_predict.proba > 1:
          raise HTTPException(status_code=400, detail="Probability Threshold must be between 0 and 1.")
     instance = trained_models[obs_predict.model]
-    actual = int(data.iloc[obs_predict.index]['Fraud_Label'])
-    obs = [data.iloc[obs_predict.index,:].drop(y_col_name).tolist()]
+    ind_of_test = X_test_scaled_hp.index.tolist()[obs_predict.index]
+    actual = int(data.loc[ind_of_test]['Fraud_Label'])
+    obs = [X_test_scaled_hp.loc[ind_of_test].tolist()]
 
     if len(obs[0]) != 29: raise HTTPException(status_code=400, detail='Model requires 29 inputs in order to make predictions')
     else: prediction, prediction_proba = instance.query(X_test_scaled_nhp, y_test, single=True, single_obs=obs, proba=obs_predict.proba)
-    obs_orig = orig_data.iloc[obs_predict.index,:].tolist()
+    obs_orig = orig_data.loc[ind_of_test].tolist()
     obs_orig = [str(element) for element in obs_orig]
     orig_col_names = orig_data.columns.tolist()
+    actual_proba = f"{float(obs_orig[orig_col_names.index('Risk_Score')])*100:.2f}/100"
+    obs_orig.pop(-3)
+    orig_col_names.pop(-3)
     return {
          "prediction":prediction,
          'prediction_proba': prediction_proba,
          "actual":actual,
-         "actual_proba": f"{float(obs_orig[orig_col_names.index('Risk_Score')])*100:.2f}/100",
+         "actual_proba": actual_proba,
          "headers": orig_col_names,
          "observation": obs_orig
-         }    
+         }
+
+class CompPredict(BaseModel):
+     index: int
+     proba: float
+
+@app.post('/comparative_obs_predict/')
+def comp_predict(comp_obs_predict: CompPredict):
+    if comp_obs_predict.index >= 7500 or comp_obs_predict.index < 0:
+         raise HTTPException(status_code=400, detail="Index value must be greater than or equal to 0 and less than 7500.")
+    if comp_obs_predict.proba < 0 or comp_obs_predict.proba > 1:
+         raise HTTPException(status_code=400, detail="Probability Threshold must be between 0 and 1.")
+    ind_of_test = X_test_scaled_hp.index.tolist()[comp_obs_predict.index]
+    actual = int(data.loc[ind_of_test]['Fraud_Label'])
+    obs = [X_test_scaled_hp.loc[ind_of_test].tolist()]
+    if len(obs[0]) != 29: raise HTTPException(status_code=400, detail='Model requires 29 inputs in order to make predictions')
+    obs_orig = orig_data.loc[ind_of_test].tolist()
+    obs_orig = [str(element) for element in obs_orig]
+    orig_col_names = orig_data.columns.tolist()
+    actual_proba = f"{float(obs_orig[orig_col_names.index('Risk_Score')])*100:.2f}%"
+    obs_orig.pop(-3)
+    orig_col_names.pop(-3)
+    predictions, predictions_proba = {}, {}
+    for model in models:
+         instance = trained_models[model]
+         predictions[model], predictions_proba[model] = instance.query(X_test_scaled_nhp, y_test, single=True, single_obs=obs, proba=comp_obs_predict.proba)
+    return {
+         "prediction": predictions,
+         'prediction_proba': predictions_proba,
+         "actual":actual,
+         "actual_proba": actual_proba,
+         "headers": orig_col_names,
+         "observation": obs_orig
+     }

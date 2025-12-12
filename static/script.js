@@ -160,7 +160,6 @@ function displayApiResults(data) {
 
 async function singleQueryTimed() {
     response = await singleQuery();
-    console.log(response.status)
     timeToRun = `Ran in ${response.duration} ms`
     const resultContainer = document.getElementById('timer')
     resultContainer.innerHTML = '';
