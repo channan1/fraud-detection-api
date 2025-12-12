@@ -10,7 +10,7 @@ async function modelPerf(model){
 
     try {
         start = performance.now()
-        response = await fetch(`http://127.0.0.1:8000/metrics/`,{
+        response = await fetch(`/metrics/`,{
             method: 'POST',
             headers: {
                 'accept': 'application/json',
@@ -46,7 +46,7 @@ async function modelPerfMult(){
 
 async function modelQuery(model){
         try {
-        await fetch(`http://127.0.0.1:8000/metrics/`,{
+        await fetch(`/metrics/`,{
             method: 'POST',
             headers: {
                 'accept': 'application/json',
@@ -81,7 +81,7 @@ async function singleQuery(){
 
     const startTime = performance.now()
     try {
-        const response = await fetch(`http://127.0.0.1:8000/obs_predict/`, {
+        const response = await fetch(`/obs_predict/`, {
             method: 'POST',
             headers: {
                 'accept': 'application/json',
