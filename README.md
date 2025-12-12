@@ -1,6 +1,8 @@
 # Credit Card Fraud Detection API
 ML-powered fraud detection system with real-time predictions via REST API and web interface.
 
+![Fraud Detection Demo](static/images/demo.gif)
+
 ## Features
 - **Machine Learning Models**: Seven models trained on synthetic credit card transaction data.
 - **REST API**: FastAPI backend with automatic documentation
@@ -66,8 +68,8 @@ Access the application at `http://localhost:8000` or `http://127.0.0.1:8000`
 - **Interactive Docs**: http://localhost:8000/docs
 - **Alternative Docs**: http://localhost:8000/redoc
 
-## Demo
-![Fraud Detection Demo](static/images/demo.gif)
+## Live Demo
+[View Live Application](https://fraud-detection-api-dz52.onrender.com)
 
 ## API Endpoints
 - `GET /` - View web interface dashboard
